@@ -8,6 +8,9 @@ from .models import Tag, Post, Comment, Profile
 from .serializers import TagSerializer, PostSerializer, CommentSerializer, ProfileSerializer
 from .permissions import IsOwnerOrReadOnly, IsProfileOwnerOrReadOnly
 
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+
 # Create your views here.
 
 # @api_view(['GET', 'POST'])
@@ -84,7 +87,15 @@ class CommentViewSet(viewsets.ModelViewSet):
     ]
     
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        comment = serializer.save(author=self.request.user)
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            'comments',
+            {
+                'type': 'new_comment',
+                'data': CommentSerializer(comment).data,
+            }
+        )
     
 
 class ProfileViewSet(viewsets.ModelViewSet):
