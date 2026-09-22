@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     
     'blog.apps.BlogConfig',
     'rest_framework',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication', #  для frontend и внешних API-запросов
+        'rest_framework.authentication.SessionAuthentication', # для админки Django и внутренних API-запросов, для тестирования в браузере
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema', # для генерации документации
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Blog API',
+    'DESCRIPTION': 'API for posts, comments, tags, and user profiles',
+    'VERSION': '1.0.0',
+}
