@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width:device-width, initial-scale=1.0" >
+        <title>Django Blog</title>
+
+        <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
+    </head>
+
+    <body>
+        <h1>Django Blog API</h1>
+
+        <section class="panel">
+            <h2>Вход</h2>
+            <input type="text" class="username-input" name="username" autocomplete="username" placeholder="Имя пользователя">
+            <input type="password" class="password-input" name="password"autocomplete="current-password" placeholder="Пароль">
+
+            <button class="login-button">Войти</button>
+            <p class="login-message"></p>
+        </section>
+
+        <section class="panel">
+            <h2>Посты</h2>
+            <button class="load-posts-button">Загрузить посты</button>
+
+            <div class="create-tag-container">
+            <h3>Создать тег</h3>
+
+            <input
+                type="text"
+                class="tag-name"
+                placeholder="Название нового тега"
+            >
+
+            <button class="create-tag-button">
+                Создать тег
+            </button>
+
+            <p class="tag-message"></p>
+            </div>
+
+            <h3>Создать пост</h3>
+            <input type="text" class="post-title" placeholder="Название">
+            <textarea class="create-post-content"></textarea>
+            <label for="post-tags">Выберите теги</label>
+            <select id="post-tags" class="post-tags" multiple></select>
+            <button class="create-post-button">Создать</button>
+            <p class="post-message"></p>
+
+            <div class="change-post-container" hidden>
+                <h3>Изменить пост</h3>
+                <input type="text" class="change-post-title" placeholder="Новое название">
+                <textarea class="change-post-content"></textarea>
+                <div>
+                    <button class="save-changes-button">Сохранить</button>
+                    <button class="stop-changes-button">Отменить</button>
+                    <p class="changes-message"></p>
+                </div>
+            </div>
+
+            <div class="posts-container"></div>
+        </section>
+        
+        <section class="panel">
+            <h3>Комментарии</h3>
+            <button class="load-comments-button">Загрузить комментарии</button>
+            <div class="comments-container"></div>
+            <p>Добавить комментарий</p>
+            <input type="hidden" class="comment-post-id">
+            <p class="selected-post-message">
+            Сначала выберите пост для комментария
+            </p>
+            <textarea class="comment-content"></textarea>
+            <button class="create-comment-button">Добавить</button>
+            <p class="comment-message"></p>
+        </section>
+
+        <script src="{% static 'blog/app.js' %}"></script>
+    </body>
+</html>

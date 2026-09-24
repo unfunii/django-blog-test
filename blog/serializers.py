@@ -13,6 +13,13 @@ class PostSerializer(serializers.ModelSerializer):
         read_only=True, # read_only=True — клиент может увидеть автора, но не может сам указать его имя.
     )
     
+    tag_names = serializers.SlugRelatedField(
+        source='tags',
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
+    
     class Meta:
         model = Post
         fields = [
@@ -21,6 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
             'content',
             'author',
             'tags',
+            'tag_names',
             'created_at',
             'updated_at',
         ]

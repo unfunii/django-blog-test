@@ -1,6 +1,6 @@
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
-# from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 
 from rest_framework import viewsets, permissions
 
@@ -108,3 +108,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        
+
+def home(request):
+    return render(request, 'blog/index.html')
