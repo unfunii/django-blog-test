@@ -364,9 +364,11 @@ createCommentBtn.addEventListener('click', async () => {
 })
 
 
+const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+
 const socket = new WebSocket(
-    `ws://${window.location.host}/ws/comments/`
-)
+  `${wsProtocol}//${window.location.host}/ws/comments/`
+);
 /*
 new WebSocket(...) — создаёт постоянное соединение с сервером;
 ws:// — протокол WebSocket, аналог http://;
