@@ -1,5 +1,10 @@
 # Django Blog API
 
+## Демо
+
+- Приложение: `https://django-blog-test-2tvo.onrender.com/`
+- Документация API (Swagger): `https://django-blog-test-2tvo.onrender.com/api/docs/`
+
 ## О проекте
 
 Это приложение для публикации постов с тегами и комментариями.
